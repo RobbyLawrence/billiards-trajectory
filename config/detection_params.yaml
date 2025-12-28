@@ -1,0 +1,45 @@
+# Detection parameters for GamePigeon 8 Ball analysis
+
+# Table detection
+table:
+  # HSV color range for green felt (adjust based on GamePigeon's specific green)
+  hsv_lower: [35, 40, 40]   # Lower bound for green in HSV
+  hsv_upper: [85, 255, 255] # Upper bound for green in HSV
+  min_area: 50000            # Minimum contour area for table detection
+
+# Ball detection
+balls:
+  # Hough Circle Transform parameters
+  dp: 1.2                    # Inverse ratio of accumulator resolution
+  min_dist: 30               # Minimum distance between circle centers
+  param1: 50                 # Canny edge detector higher threshold
+  param2: 30                 # Accumulator threshold for circle detection
+  min_radius: 10             # Minimum ball radius in pixels
+  max_radius: 40             # Maximum ball radius in pixels
+
+  # Color classification thresholds
+  cue_ball_value_threshold: 200   # Minimum V value for white cue ball
+  black_ball_value_threshold: 80  # Maximum V value for 8-ball
+
+# Cue stick detection
+cue:
+  # Hough Line Transform parameters
+  rho: 1                     # Distance resolution in pixels
+  theta: 0.0174533           # Angle resolution in radians (1 degree)
+  threshold: 100             # Minimum votes for line detection
+  min_line_length: 50        # Minimum line length
+  max_line_gap: 10           # Maximum gap between line segments
+  proximity_threshold: 100   # Max distance from cue ball to consider line as cue
+
+# Image preprocessing
+preprocessing:
+  max_width: 1920            # Resize images larger than this
+  max_height: 1080
+  gaussian_blur_kernel: 5    # Kernel size for noise reduction
+
+# Physics simulation
+simulation:
+  max_bounces: 10            # Maximum number of cushion bounces
+  min_velocity: 0.5          # Stop simulation below this velocity
+  time_step: 0.01            # Simulation time step in seconds
+  initial_velocity: 5.0      # Default cue ball velocity (m/s)
